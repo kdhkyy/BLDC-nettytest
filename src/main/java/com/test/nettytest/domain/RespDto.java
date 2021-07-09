@@ -23,7 +23,6 @@ public class RespDto implements Serializable {
         this.setResult(code, msg, field);
     }
 
-
     public RespDto setResult(CODE code, String msg) {
         return setResult(code, msg, null);
     }
@@ -34,7 +33,6 @@ public class RespDto implements Serializable {
         this.setField(field);
         return this;
     }
-
 
     public boolean isSuccess() {
         return code == CODE.SUCCESS;

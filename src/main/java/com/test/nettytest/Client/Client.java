@@ -24,7 +24,7 @@ public class Client {
     }
 
     public void connect() throws InterruptedException {
-        eventLoopGroup = new NioEventLoopGroup(1, new DefaultThreadFactory("client"));
+        eventLoopGroup = new NioEventLoopGroup(2, new DefaultThreadFactory("client"));
 
         Bootstrap bootstrap = new Bootstrap().group(eventLoopGroup);
 

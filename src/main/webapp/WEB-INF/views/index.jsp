@@ -188,6 +188,37 @@
                 </div>
                 <!-- /.container-fluid -->
 
+                <!-- 시리얼 통신 테스트용 START-->
+                <div class="col-lg-12">
+
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">시리얼 통신 테스트</h6>
+                        </div>
+                        <div class="card-body serial">
+                            <a class="btn btn-primary btn-icon-split" style="margin: 10px">
+                                <span class="text" value="GATE OPEN">GATE OPEN</span>
+                            </a>
+                            <a class="btn btn-primary btn-icon-split" style="margin: 10px">
+                                <span class="text" value="GATE DOWN">GATE DOWN</span>
+                            </a>
+                            <a class="btn btn-primary btn-icon-split" style="margin: 10px">
+                                <span class="text" value="SYSTEM VER">SYSTEM VER</span>
+                            </a>
+                            <a class="btn btn-primary btn-icon-split" style="margin: 10px">
+                                <span class="text" value="GATE UPLOCK">GATE UPLOCK</span>
+                            </a>
+                            <a class="btn btn-primary btn-icon-split" style="margin: 10px">
+                                <span class="text" value="GATE UNLOCK">GATE UNLOCK</span>
+                            </a>
+                            <a class="btn btn-primary btn-icon-split" style="margin: 10px">
+                                <span class="text" value="STATUS">STATUS</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- 시리얼 통신 테스트용 END -->
+
             </div>
             <!-- End of Main Content -->
 
@@ -260,6 +291,31 @@
                     $.ajax({
                         type:"POST",
                         url:"/sendCommand/"+$(this).text(),
+                        contentType : "application/json",
+                        data: JSON.stringify({"host" : temp, "port" : temp2}),
+                        success: function(res){
+                            console.log(res.resp.msg);
+                        },
+                        error: function(xhr, status, error) {
+                            alert(error);
+                        }
+                    });
+                }
+            })
+
+            $(".card-body card-body a span").click(function () {
+                temp = $("#host").val();
+                temp2 = $("#port").val();
+                if(temp == "" || temp == null || temp == undefined || ( temp != null && typeof temp == "object" && !Object.keys(temp).length)) {
+                    alert("IP를 입력해주세요");
+                    return false;
+                }else if(temp2 == "" || temp2 == null || temp2 == undefined || ( temp2 != null && typeof temp2 == "object" && !Object.keys(temp2).length)){
+                    alert("port번호를 입력해주세요");
+                    return false;
+                }else{
+                    $.ajax({
+                        type:"POST",
+                        url:"/serialSend/"+$(this).text(),
                         contentType : "application/json",
                         data: JSON.stringify({"host" : temp, "port" : temp2}),
                         success: function(res){

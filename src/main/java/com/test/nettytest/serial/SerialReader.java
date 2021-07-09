@@ -15,14 +15,13 @@ public class SerialReader implements Runnable{
     public void run() {
         byte[] buffer = new byte[1024];
         int len = -1;
-        while (true) {
-            try {
-                while((len = this.in.read(buffer)) > -1){
-                    System.out.println(new String(buffer, 0, len));
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
+
+        try {
+            while ((len = this.in.read(buffer)) > -1) {
+                System.out.print(new String(buffer, 0, len));
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

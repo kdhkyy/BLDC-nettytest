@@ -306,26 +306,20 @@
             $(".card-body card-body a span").click(function () {
                 temp = $("#host").val();
                 temp2 = $("#port").val();
-                if(temp == "" || temp == null || temp == undefined || ( temp != null && typeof temp == "object" && !Object.keys(temp).length)) {
-                    alert("IP를 입력해주세요");
-                    return false;
-                }else if(temp2 == "" || temp2 == null || temp2 == undefined || ( temp2 != null && typeof temp2 == "object" && !Object.keys(temp2).length)){
-                    alert("port번호를 입력해주세요");
-                    return false;
-                }else{
-                    $.ajax({
-                        type:"POST",
-                        url:"/serialSend/"+$(this).text(),
-                        contentType : "application/json",
-                        data: JSON.stringify({"host" : temp, "port" : temp2}),
-                        success: function(res){
-                            console.log(res.resp.msg);
-                        },
-                        error: function(xhr, status, error) {
-                            alert(error);
-                        }
-                    });
-                }
+
+                 $.ajax({
+                     type:"POST",
+                     url:"/serialSend/"+$(this).text(),
+                     contentType : "application/json",
+                     data: JSON.stringify({"host" : temp, "port" : temp2}),
+                     success: function(res){
+                         console.log(res.resp.msg);
+                     },
+                     error: function(xhr, status, error) {
+                         alert(error);
+                     }
+                 });
+
             })
         });
     </script>
